@@ -19,7 +19,7 @@ class StoreUpdateUserFormRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, mixed>
+     * @return array
      */
     public function rules()
     {
@@ -30,20 +30,25 @@ class StoreUpdateUserFormRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                'unique:users,email,{$id},id',
+                "unique:users,email,{$id},id",
             ],
             'password' => [
                 'required',
                 'min:6',
-                'max:15'
-            ]
-            ];
+                'max:15',
+            ],
+            'image' => [
+                'nullable',
+                'image',
+                'max:2048',
+            ],
+        ];
 
-        if($this->method('PUT')) {
+        if ($this->method('PUT')) {
             $rules['password'] = [
                 'nullable',
                 'min:6',
-                'max:15'
+                'max:15',
             ];
         }
 
